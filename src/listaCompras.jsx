@@ -15,26 +15,32 @@ function ListaCompras() {
 
   // Función para eliminar un producto de la lista
   const eliminarProducto = (index) => {
-    // Completar la lógica para eliminar un producto
+    setProductos(productos.filter((_, i) => i !== index));
   };
 
   return (
-    <div>
-      <h2>Lista de Compras</h2>
+    <div style={{ fontFamily: "Arial", maxWidth: "400px", margin: "auto" }}>
+      <h2>🛒 Lista de Compras</h2>
       <input
         type="text"
         value={nuevoProducto}
         onChange={(e) => setNuevoProducto(e.target.value)}
+        placeholder="Escribe un producto..."
       />
       <button onClick={agregarProducto}>Agregar</button>
-      <ul>
-        {productos.map((producto, index) => (
-          <li key={index}>
-            {producto}
-            <button onClick={() => eliminarProducto(index)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
+
+      {productos.length === 0 ? (
+        <p>No hay productos en la lista.</p>
+      ) : (
+        <ul>
+          {productos.map((producto, index) => (
+            <li key={index}>
+              {producto}{" "}
+              <button onClick={() => eliminarProducto(index)}>❌</button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
